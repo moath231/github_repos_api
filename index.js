@@ -1,12 +1,35 @@
-let textinput = document.querySelector("#textinput");
-let imaglogo = document.querySelector("#imaglogo");
-let info = document.querySelector(".info");
+let gitcontainer = document.querySelector(".gitcontainer");
 
-imaglogo.addEventListener("click", function () {
+
+let formcon = document.createElement("form");
+
+let inputinform = document.createElement("input");
+    inputinform.type = "text";
+    inputinform.id = "textinput";
+
+let image = document.createElement("img");
+    image.id = "imaglogo";
+    image.src = "./github-logo(1).png";
+
+  formcon.appendChild(inputinform);
+  formcon.appendChild(image);
+
+  gitcontainer.appendChild(formcon);
+
+
+let info = document.createElement("div");
+    info.className = "info";
+
+    gitcontainer.appendChild(info);
+
+
+
+
+image.addEventListener("click", function () {
   fetchgit();
 });
 
-textinput.addEventListener("keypress", function(event) {
+inputinform.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     event.preventDefault();
     fetchgit();
@@ -14,10 +37,10 @@ textinput.addEventListener("keypress", function(event) {
 });
 
 function fetchgit() {
-  if (textinput.value == "") {
+  if (inputinform.value == "") {
     info.innerHTML = "no data";
   } else {
-    fetch(`https://api.github.com/users/${textinput.value}/repos`)
+    fetch(`https://api.github.com/users/${inputinform.value}/repos`)
       .then((response) => response.json())
 
       .then((data) => {
